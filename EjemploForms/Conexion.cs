@@ -15,19 +15,19 @@ namespace EjemploForms
 
         public Conexion()
         {
-            conexion = new MySqlConnection("Server = 127.0.0.1; Database = test; Uid = root; Pwd =root; Port = 3306");
+            conexion = new MySqlConnection("Server = 127.0.0.1; Database = hotel; Uid = root; Pwd =root; Port = 3306");
         }
 
-        public DataTable getPokemons() {
+        public DataTable getHabitacion() {
             try
             {
                 conexion.Open();
-                MySqlCommand consulta = new MySqlCommand("SELECT * FROM pokemon", conexion);
+                MySqlCommand consulta = new MySqlCommand("SELECT * FROM habitacion", conexion);
                 MySqlDataReader resultado = consulta.ExecuteReader();
-                DataTable pokemons = new DataTable();
-                pokemons.Load(resultado);
+                DataTable hotel = new DataTable();
+                hotel.Load(resultado);
                 conexion.Close();
-                return pokemons;
+                return hotel;
             }
             catch (MySqlException e)
             {
@@ -35,18 +35,18 @@ namespace EjemploForms
             }
         }
 
-        public DataTable getPokemonPorNombre(String nombre)
+        public DataTable getPokemonPorNombre(String numero)
         {
             try
             {
                 conexion.Open();
                 MySqlCommand consulta = 
-                    new MySqlCommand("SELECT * FROM pokemon where name ='" + nombre + "'", conexion);
+                    new MySqlCommand("SELECT * FROM habitacion where Numero ='" + numero + "'", conexion);
                 MySqlDataReader resultado = consulta.ExecuteReader();
-                DataTable pokemons = new DataTable();
-                pokemons.Load(resultado);
+                DataTable hotel = new DataTable();
+                hotel.Load(resultado);
                 conexion.Close();
-                return pokemons;
+                return hotel;
             }
             catch (MySqlException e)
             {
@@ -55,13 +55,13 @@ namespace EjemploForms
 
         }
 
-        public void ActualizaPokemon(String id, String weight, String height, String habitat)
+        public void ActualizaHabitacion(String numeroCamas, String individual, String matrimonio, String supletoria)
         {
             try
             {
                 conexion.Open();
                 MySqlCommand consulta = 
-                    new MySqlCommand("UPDATE pokemon SET weight='"+ weight + "', height='"+height+ "', habitat='" + habitat + "' WHERE id='"+id+"'" , conexion);
+                    new MySqlCommand("UPDATE habitacion SET Numero Camas='"+ numeroCamas + "', Individual='"+ individual + "', Matrimonio='" + matrimonio + "', Supletoria='" + supletoria + "' WHERE Numero='101'" , conexion);
                 consulta.ExecuteNonQuery();
                 conexion.Close();
             }
@@ -71,5 +71,20 @@ namespace EjemploForms
             }
         }
 
+        public void ActualizaFecha(String numero, String fechaInicio, String fechaFinal)
+        {
+            try
+            {
+                conexion.Open();
+                MySqlCommand consulta =
+                    new MySqlCommand("UPDATE reserva INSERT Fecha Inicio='" + fechaInicio + "', Fecha Final='" + fechaFinal + "' WHERE Numero='" + numero + "'", conexion);
+                consulta.ExecuteNonQuery();
+                conexion.Close();
+            }
+            catch (MySqlException e)
+            {
+                throw e;
+            }
+        }
     }
 }

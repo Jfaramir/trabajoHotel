@@ -18,17 +18,18 @@ namespace EjemploForms
         public VentanaPrincipal()
         {
             InitializeComponent();
-            misPokemons = miConexion.getPokemons();
+            //misPokemons = miConexion.getHabitacion();
             dataGridView1.DataSource = misPokemons;
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            misPokemons = miConexion.getPokemonPorNombre(textBox1.Text);
-            textBox2.Text = misPokemons.Rows[0]["weight"].ToString();
-            textBox3.Text = misPokemons.Rows[0]["height"].ToString();
-            textBox4.Text = misPokemons.Rows[0]["habitat"].ToString();
-            label6.Text = misPokemons.Rows[0]["id"].ToString();
+            misPokemons = miConexion.getConsultaHabitaciones(textBox1.Text , textBox2.Text);
+            //textBox2.Text = misPokemons.Rows[0]["Numero Camas"].ToString();
+            //textBox3.Text = misPokemons.Rows[0]["Individual"].ToString();
+            //textBox4.Text = misPokemons.Rows[0]["Matrimonio"].ToString();
+            //textBox5.Text = misPokemons.Rows[0]["Supletoria"].ToString();
+            
         }
 
 
@@ -41,9 +42,19 @@ namespace EjemploForms
 
         private void button2_Click(object sender, EventArgs e)
         {
-            miConexion.ActualizaPokemon(label6.Text, textBox2.Text, textBox3.Text, textBox4.Text);
+            miConexion.ActualizaHabitacion(textBox2.Text, textBox3.Text, textBox4.Text, textBox5.Text);
             //refresca el dataGridView
-            dataGridView1.DataSource = miConexion.getPokemons();
+            dataGridView1.DataSource = miConexion.getHabitacion();
+        }
+
+        private void label6_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
